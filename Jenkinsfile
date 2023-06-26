@@ -20,7 +20,7 @@ pipeline {
                             -Dsonar.login=squ_2e5fb188c81da23c0d10bdd716452d9a1bf1f401 \
                             -Dsonar.projectKey=Test2 \
                             -Dsonar.exclusions=vendor/**,resources/**,**/*.java \
-                            -Dsonar.sources=/var/lib/jenkins/workspace/Dev_env_pipeline/src \
+                            -Dsonar.sources=/var/lib/jenkins/workspace/Operations2024/src \
                             -Dsonar.host.url=http://172.31.26.120:9000"
                     }
                 }
@@ -38,7 +38,7 @@ pipeline {
         }
         stage('continous deployment') {
             steps {
-               deploy adapters: [tomcat9(credentialsId: 'Devcredentials', path: '', url:'http://172.31.94.205:8080')], contextPath: 'qa', war: '**/*.war'
+               deploy adapters: [tomcat9(credentialsId: 'Devcredentials', path: '', url:'http://172.31.94.205:8080')], contextPath: 'qaenv', war: '**/*.war'
             }
         }
         stage('Continuous testing') {
@@ -52,7 +52,7 @@ pipeline {
                         [
                             artifactId: 'tt.test', 
                             classifier: '', 
-                            file: '/var/lib/jenkins/workspace/Dev_env_pipeline/target/tt.test.war', 
+                            file: '/var/lib/jenkins/workspace/Operations2024/target/tt.test.war', 
                             type: 'war'
                         ]
                     ], 
