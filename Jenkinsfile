@@ -17,7 +17,7 @@ pipeline {
                     def scannerHome = tool 'sonarqube';
                     withSonarQubeEnv('sonarqube') {
                         sh "${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.login=squ_2e5fb188c81da23c0d10bdd716452d9a1bf1f401 \
+                            -Dsonar.login=sqa_58d76e80238e92fed3510ee9b1927054cee59225 \
                             -Dsonar.projectKey=Test2 \
                             -Dsonar.exclusions=vendor/**,resources/**,**/*.java \
                             -Dsonar.sources=/var/lib/jenkins/workspace/Operations2024/src \
