@@ -26,11 +26,19 @@ pipeline {
                 }
             }
         }
-        //stage('SonarQube QG status') {
-            //steps {
-              //waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube'
-            //}
-        //}
+        stage('SonarQube QG status') {
+            steps {
+                sleep(time: 60, unit: 'SECONDS')
+                timeout(time: 1, unit: 'MINUTES') {
+                    script {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error"Pipeline aborted due to quality gate failure: ${qg.status}")
+                        }
+                    }
+                }
+            }
+        }
         stage('Continuous build') {
             steps {
                sh 'mvn clean package'
